@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruang Persiapan Pernikahan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FBF7EF;
+    --surface:#FFFFFF;
+    --surface-soft:#F5EFE2;
+    --text:#2E2B26;
+    --text-soft:#726B5C;
+    --sage:#7C8B6F;
+    --sage-dark:#5B6B50;
+    --beige:#E9DFC8;
+    --gold:#B08A3E;
+    --border:#E6DCC6;
+    --danger:#B5563C;
+    --danger-soft:#F5E4DE;
+    --success:#5E7A52;
+    --success-soft:#E7EEE1;
+    --warn:#B4823B;
+    --warn-soft:#F3E7D2;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(46,43,38,0.06),0 6px 20px rgba(46,43,38,0.05);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;}
+  h1{font-size:2.1rem;font-weight:600;margin:0;}
+  h2{font-size:1.5rem;font-weight:600;margin:0 0 4px;}
+  h3{font-size:1.2rem;font-weight:600;margin:0;}
+  p{line-height:1.55;}
+  a{color:inherit;}
+  button{font-family:inherit;cursor:pointer;}
+  input,select,textarea{font-family:inherit;}
+
+  /* ---------- Login ---------- */
+  #login-screen{
+    min-height:100vh;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 20% 15%, #F3ECDA 0%, var(--bg) 55%);
+    padding:24px;
+  }
+  .login-card{
+    background:var(--surface);border:1px solid var(--border);border-radius:20px;
+    padding:44px 36px;max-width:400px;width:100%;box-shadow:var(--shadow);text-align:center;
+  }
+  .login-card .mark{
+    width:52px;height:52px;border-radius:50%;background:var(--beige);margin:0 auto 18px;
+    display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.4rem;font-family:'Cormorant Garamond',serif;
+  }
+  .login-card h1{margin-bottom:6px;}
+  .login-card p.sub{color:var(--text-soft);font-size:0.92rem;margin-top:0;margin-bottom:26px;}
+  .who-btns{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+  .who-btn{
+    padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--surface-soft);
+    font-size:1rem;font-weight:600;color:var(--text);text-align:left;display:flex;justify-content:space-between;align-items:center;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .who-btn:hover{border-color:var(--sage);background:#F1EBDA;}
+  .who-btn span.tag{font-size:0.72rem;font-weight:600;color:var(--sage-dark);background:var(--success-soft);padding:3px 9px;border-radius:20px;}
+  .login-note{font-size:0.78rem;color:var(--text-soft);line-height:1.5;border-top:1px dashed var(--border);padding-top:16px;margin-top:6px;}
+
+  /* ---------- Shell ---------- */
+  #app{display:none;min-height:100vh;}
+  .shell{display:flex;min-height:100vh;}
+  .sidebar{
+    width:236px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);
+    display:flex;flex-direction:column;padding:22px 14px;position:fixed;top:0;bottom:0;left:0;
+    transform:translateX(0);transition:transform .22s ease;z-index:40;
+  }
+  .brand{display:flex;align-items:center;gap:10px;padding:4px 10px 22px;}
+  .brand .mark{width:34px;height:34px;border-radius:50%;background:var(--beige);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:1.1rem;flex-shrink:0;}
+  .brand .names{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;line-height:1.2;}
+  .brand .names small{display:block;font-family:'Manrope',sans-serif;font-size:0.68rem;color:var(--text-soft);font-weight:600;letter-spacing:.02em;}
+  nav.nav{display:flex;flex-direction:column;gap:2px;flex:1;overflow-y:auto;}
+  .nav-item{
+    display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:10px;color:var(--text-soft);
+    font-size:0.92rem;font-weight:600;border:none;background:transparent;text-align:left;width:100%;
+  }
+  .nav-item .ic{width:18px;text-align:center;font-size:1rem;}
+  .nav-item:hover{background:var(--surface-soft);color:var(--text);}
+  .nav-item.active{background:var(--sage);color:#fff;}
+  .sidebar-foot{padding-top:12px;border-top:1px solid var(--border);margin-top:10px;}
+  .sidebar-foot .who{font-size:0.8rem;color:var(--text-soft);padding:6px 12px;}
+  .logout-btn{width:100%;text-align:left;padding:9px 12px;border-radius:10px;border:none;background:transparent;color:var(--danger);font-weight:600;font-size:0.85rem;}
+  .logout-btn:hover{background:var(--danger-soft);}
+
+  .topbar{
+    display:none;position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--border);
+    padding:12px 16px;align-items:center;justify-content:space-between;
+  }
+  .topbar .brand{padding:0;}
+  .icon-btn{background:none;border:none;font-size:1.3rem;padding:6px;color:var(--text);}
+
+  .main{flex:1;margin-left:236px;padding:28px 34px 90px;max-width:1180px;}
+  .page-head{margin-bottom:22px;}
+  .page-head p.desc{color:var(--text-soft);margin-top:4px;font-size:0.94rem;}
+
+  .overlay-backdrop{position:fixed;inset:0;background:rgba(46,43,38,0.35);z-index:50;display:none;}
+  .overlay-backdrop.open{display:block;}
+
+  /* ---------- Cards / grid ---------- */
+  .grid{display:grid;gap:16px;}
+  .grid-4{grid-template-columns:repeat(4,1fr);}
+  .grid-3{grid-template-columns:repeat(3,1fr);}
+  .grid-2{grid-template-columns:repeat(2,1fr);}
+  @media(max-width:960px){.grid-4{grid-template-columns:repeat(2,1fr);} .grid-3{grid-template-columns:repeat(2,1fr);} .grid-2{grid-template-columns:1fr;}}
+  @media(max-width:560px){.grid-4{grid-template-columns:1fr;}}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);}
+  .stat-card .label{font-size:0.78rem;color:var(--text-soft);font-weight:600;margin-bottom:6px;}
+  .stat-card .value{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;}
+  .stat-card .sub{font-size:0.76rem;color:var(--text-soft);margin-top:4px;}
+  .stat-card.accent .value{color:var(--sage-dark);}
+  .stat-card.warn .value{color:var(--warn);}
+  .stat-card.danger .value{color:var(--danger);}
+
+  .hero-countdown{
+    background:linear-gradient(135deg,var(--sage-dark),var(--sage));color:#fff;border-radius:20px;
+    padding:30px 32px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between;margin-bottom:20px;
+  }
+  .hero-countdown .names-line{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;}
+  .hero-countdown .date-line{font-size:0.85rem;opacity:0.85;margin-top:2px;}
+  .hero-countdown .days-num{font-family:'Cormorant Garamond',serif;font-size:3.1rem;font-weight:600;line-height:1;}
+  .hero-countdown .days-label{font-size:0.8rem;opacity:0.9;letter-spacing:.03em;}
+
+  .section-title{display:flex;justify-content:space-between;align-items:center;margin:30px 0 12px;}
+  .section-title h3{font-size:1.25rem;}
+
+  .progress-track{height:8px;background:var(--surface-soft);border-radius:20px;overflow:hidden;margin-top:8px;}
+  .progress-fill{height:100%;background:var(--sage);border-radius:20px;transition:width .3s ease;}
+  .progress-fill.gold{background:var(--gold);}
+  .progress-fill.warn{background:var(--warn);}
+  .progress-fill.danger{background:var(--danger);}
+
+  .list-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;}
+  .list-row{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;border-bottom:1px solid var(--border);gap:12px;}
+  .list-row:last-child{border-bottom:none;}
+  .list-row .main-txt{font-weight:600;font-size:0.93rem;}
+  .list-row .sub-txt{font-size:0.78rem;color:var(--text-soft);margin-top:2px;}
+  .badge{font-size:0.7rem;font-weight:700;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+  .badge.success{background:var(--success-soft);color:var(--success);}
+  .badge.warn{background:var(--warn-soft);color:var(--warn);}
+  .badge.danger{background:var(--danger-soft);color:var(--danger);}
+  .badge.neutral{background:var(--surface-soft);color:var(--text-soft);}
+
+  .empty-state{padding:44px 20px;text-align:center;color:var(--text-soft);}
+  .empty-state p{margin:0 0 14px;}
+
+  .btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);font-weight:700;font-size:0.85rem;color:var(--text);}
+  .btn:hover{border-color:var(--sage);}
+  .btn.primary{background:var(--sage-dark);border-color:var(--sage-dark);color:#fff;}
+  .btn.primary:hover{background:var(--sage);}
+  .btn.danger{background:var(--danger);border-color:var(--danger);color:#fff;}
+  .btn.ghost{background:transparent;border-color:transparent;color:var(--text-soft);padding:7px 10px;}
+  .btn.small{padding:6px 11px;font-size:0.78rem;}
+  .btn.icon-only{padding:6px 9px;}
+
+  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .toolbar .filters{display:flex;flex-wrap:wrap;gap:8px;}
+  .search-input,.filter-select{padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface);font-size:0.85rem;color:var(--text);}
+  .search-input{min-width:190px;}
+
+  table.data-table{width:100%;border-collapse:collapse;font-size:0.86rem;}
+  table.data-table th{text-align:left;font-size:0.72rem;text-transform:uppercase;letter-spacing:.03em;color:var(--text-soft);padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface-soft);}
+  table.data-table td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+  table.data-table tr:last-child td{border-bottom:none;}
+  .table-wrap{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);}
+  .row-actions{display:flex;gap:6px;}
+  .cell-strong{font-weight:700;}
+  .cell-soft{color:var(--text-soft);font-size:0.8rem;}
+
+  .tabs{display:flex;gap:6px;margin-bottom:18px;border-bottom:1px solid var(--border);}
+  .tab-btn{padding:9px 16px;border:none;background:none;font-weight:700;font-size:0.87rem;color:var(--text-soft);border-bottom:2px solid transparent;margin-bottom:-1px;}
+  .tab-btn.active{color:var(--sage-dark);border-bottom-color:var(--sage-dark);}
+
+  /* modal */
+  .modal{position:fixed;inset:0;z-index:60;display:none;align-items:flex-end;justify-content:center;}
+  .modal.open{display:flex;}
+  @media(min-width:640px){.modal{align-items:center;}}
+  .modal-panel{
+    background:var(--surface);width:100%;max-width:520px;max-height:88vh;overflow-y:auto;
+    border-radius:20px 20px 0 0;padding:24px 22px 26px;box-shadow:0 -6px 30px rgba(0,0,0,.15);
+  }
+  @media(min-width:640px){.modal-panel{border-radius:18px;margin:20px;}}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:0.78rem;font-weight:700;color:var(--text-soft);margin-bottom:6px;}
+  .field input,.field select,.field textarea{
+    width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:10px;font-size:0.9rem;background:var(--bg);color:var(--text);
+  }
+  .field textarea{resize:vertical;min-height:64px;}
+  .field-row{display:flex;gap:10px;}
+  .field-row .field{flex:1;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px;}
+
+  .confirm-panel{max-width:360px;text-align:left;}
+
+  .insight-list{display:flex;flex-direction:column;gap:9px;}
+  .insight-item{display:flex;gap:10px;align-items:flex-start;font-size:0.87rem;background:var(--surface-soft);padding:11px 13px;border-radius:11px;}
+  .insight-item .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:6px;flex-shrink:0;}
+
+  .disclaimer{font-size:0.78rem;color:var(--text-soft);background:var(--surface-soft);border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 10px 10px 0;margin-bottom:16px;line-height:1.5;}
+
+  .milestone-block{margin-bottom:22px;}
+  .milestone-head{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .milestone-head .phase-badge{background:var(--beige);color:var(--gold);font-weight:700;font-size:0.68rem;padding:3px 10px;border-radius:20px;}
+  .check-row{display:flex;align-items:center;gap:12px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:11px;margin-bottom:7px;}
+  .check-row.done{opacity:0.6;}
+  .check-row .ctick{width:20px;height:20px;border-radius:6px;border:2px solid var(--sage);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:#fff;}
+  .check-row.done .ctick{background:var(--sage);}
+  .check-row .txt{flex:1;font-size:0.88rem;}
+  .check-row.done .txt{text-decoration:line-through;}
+  .check-row .meta{font-size:0.74rem;color:var(--text-soft);}
+
+  .kv-mini{display:flex;justify-content:space-between;font-size:0.84rem;padding:5px 0;border-bottom:1px dashed var(--border);}
+  .kv-mini:last-child{border-bottom:none;}
+
+  .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:35;padding:6px 4px;}
+  .bottom-nav .bn-scroll{display:flex;overflow-x:auto;gap:4px;}
+  .bn-item{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:7px 12px;border:none;background:none;color:var(--text-soft);font-size:0.62rem;font-weight:700;}
+  .bn-item.active{color:var(--sage-dark);}
+  .bn-item .ic{font-size:1.15rem;}
+
+  @media(max-width:900px){
+    .sidebar{transform:translateX(-100%);box-shadow:0 0 0 100vw rgba(0,0,0,0);}
+    .sidebar.open{transform:translateX(0);box-shadow:0 0 40px rgba(0,0,0,.2);}
+    .topbar{display:flex;}
+    .main{margin-left:0;padding:20px 16px 90px;}
+    .bottom-nav{display:block;}
+  }
+  ::-webkit-scrollbar{height:8px;width:8px;}
+  ::-webkit-scrollbar-thumb{background:var(--beige);border-radius:10px;}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-card">
+    <div class="mark">✦</div>
+    <h1>Ruang Persiapan Pernikahan</h1>
+    <p class="sub">Dasbor pribadi untuk mengatur anggaran, tabungan, checklist, tamu, vendor, dokumen, dan bulan madu — hanya untuk berdua.</p>
+    <div class="who-btns" id="who-btns"></div>
+    <div class="login-note">Ini adalah gerbang identifikasi sederhana agar catatan aktivitas menunjukkan siapa yang mengubah data — <strong>bukan</strong> sistem keamanan sungguhan. Data tersimpan secara privat pada perangkat/akun yang mengakses artifact ini.</div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="overlay-backdrop" id="backdrop" onclick="App.closeAllOverlays()"></div>
+
+  <div class="topbar">
+    <button class="icon-btn" onclick="App.toggleSidebar()">☰</button>
+    <div class="brand"><div class="mark">✦</div></div>
+    <button class="icon-btn" onclick="App.logout()">⎋</button>
+  </div>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="mark">✦</div>
+        <div class="names" id="brand-names">Mempelai</div>
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="sidebar-foot">
+        <div class="who" id="who-label"></div>
+        <button class="logout-btn" onclick="App.logout()">Keluar</button>
+      </div>
+    </aside>
+
+    <main class="main" id="main"></main>
+  </div>
+
+  <div class="bottom-nav"><div class="bn-scroll" id="bn-scroll"></div></div>
+</div>
+
+<div class="modal" id="modal"><div class="modal-panel" id="modal-panel"></div></div>
+
+<script>
+/* ============================= STATE & STORAGE ============================= */
+const PAGES = [
+  {id:'dashboard', label:'Dasbor', icon:'⌂'},
+  {id:'budget', label:'Anggaran', icon:'◧'},
+  {id:'savings', label:'Tabungan', icon:'◈'},
+  {id:'checklist', label:'Checklist', icon:'✓'},
+  {id:'guests', label:'Tamu & RSVP', icon:'☺'},
+  {id:'vendors', label:'Vendor', icon:'✦'},
+  {id:'documents', label:'Dokumen', icon:'▤'},
+  {id:'items', label:'Mahar & Seserahan', icon:'❖'},
+  {id:'honeymoon', label:'Bulan Madu', icon:'✈'},
+  {id:'gifts', label:'Kado / Angpao', icon:'❤'},
+  {id:'settings', label:'Pengaturan', icon:'⚙'},
+];
+
+const DEFAULT_BUDGET_CATEGORIES = ['Venue','Katering','Dekorasi','Dokumentasi','Rias (MUA)','Busana Pengantin','Undangan','Souvenir','Mahar','Seserahan','Hiburan','MC','Wedding Organizer','Transportasi','Akomodasi','Keperluan Akad/Ibadah','Administrasi','Bulan Madu','Lain-lain'];
+
+const MILESTONES = [
+  {id:'m12', label:'12 Bulan Sebelum', monthsBefore:12, tasks:['Tentukan tanggal pernikahan','Tentukan estimasi anggaran pernikahan','Diskusikan konsep pernikahan','Tentukan estimasi jumlah tamu','Riset venue','Mulai menabung untuk pernikahan']},
+  {id:'m8', label:'8 Bulan Sebelum', monthsBefore:8, tasks:['Booking venue','Tentukan tema pernikahan','Riset katering','Riset dekorasi','Riset fotografer/videografer','Tentukan konsep busana pengantin']},
+  {id:'m6', label:'6 Bulan Sebelum', monthsBefore:6, tasks:['Booking vendor utama','Mulai menyiapkan dokumen pernikahan','Susun daftar tamu','Tentukan konsep undangan','Tentukan mahar','Tentukan seserahan']},
+  {id:'m3', label:'3 Bulan Sebelum', monthsBefore:3, tasks:['Finalisasi daftar tamu','Kirim/sebar undangan','Konfirmasi seluruh vendor','Pesan busana pengantin','Pesan souvenir','Finalisasi dekorasi','Finalisasi menu katering']},
+  {id:'m1', label:'1 Bulan Sebelum', monthsBefore:1, tasks:['Konfirmasi ulang semua vendor','Finalisasi denah tempat duduk','Konfirmasi kehadiran tamu','Lengkapi administrasi KUA','Siapkan mahar','Siapkan seserahan','Siapkan cincin pernikahan']},
+  {id:'w1', label:'1 Minggu Sebelum', daysBefore:7, tasks:['Konfirmasi vendor terakhir kali','Siapkan sisa pembayaran','Siapkan dokumen pernikahan','Siapkan pakaian akad & resepsi','Siapkan emergency kit','Konfirmasi transportasi','Konfirmasi akomodasi tamu']},
+  {id:'day', label:'Hari H', daysBefore:0, tasks:['Dokumen pernikahan','Cincin pernikahan','Mahar','Kontak seluruh vendor','Busana pengantin','Emergency kit','Buku tamu','Amplop pembayaran']},
+];
+
+const DEFAULT_DOCUMENTS = [
+  {name:'KTP Calon Pengantin Pria', person:'Pria'},
+  {name:'KTP Calon Pengantin Wanita', person:'Wanita'},
+  {name:'Kartu Keluarga (KK)', person:'Keluarga'},
+  {name:'Surat Pengantar RT/RW', person:'Administrasi'},
+  {name:'Formulir N1–N4 dari Kelurahan', person:'Administrasi'},
+  {name:'Akta Kelahiran', person:'Administrasi'},
+  {name:'Pas Foto', person:'Administrasi'},
+  {name:'Sertifikat Bimbingan Perkawinan (BIMWIN)', person:'Administrasi'},
+  {name:'Surat Persetujuan Orang Tua/Wali', person:'Keluarga'},
+  {name:'Surat Rekomendasi Nikah (jika beda domisili/luar KUA)', person:'Administrasi'},
+];
+
+let S = {
+  settings:{groomName:'Mempelai Pria', brideName:'Mempelai Wanita', weddingDate:'', location:'', currency:'IDR', budgetTarget:0, savingsTarget:0, engagementDate:'', nikahDate:'', receptionDate:'', seeded:false},
+  savings:{transactions:[]},
+  budget:{categories:[...DEFAULT_BUDGET_CATEGORIES], items:[]},
+  checklist:{items:[]},
+  guests:{list:[]},
+  vendors:{list:[]},
+  documents:{list:[]},
+  items:{mahar:[], seserahan:[], souvenir:[]},
+  honeymoon:{budget:{estimated:0, actual:0, paid:0}, categoryBudgets:[], flights:[], hotels:[], travelDocs:[], itinerary:[]},
+  gifts:{list:[]},
+  activity:{log:[]},
+};
+let currentUser = null; // 'Pria' | 'Wanita'
+let currentPage = 'dashboard';
+let activeTab = {}; // per-page tab state
+
+const KEYS = ['settings','savings','budget','checklist','guests','vendors','documents','items','honeymoon','gifts','activity'];
+
+async function loadAll(){
+  await Promise.all(KEYS.map(async k=>{
+    try{
+      const r = await window.storage.get('wp_'+k, false);
+      if(r && r.value){ S[k] = Object.assign(S[k], JSON.parse(r.value)); }
+    }catch(e){ /* no data yet, keep defaults */ }
+  }));
+  if(!S.settings.seeded){
+    seedDefaults();
+    S.settings.seeded = true;
+    await saveKey('settings'); await saveKey('checklist'); await saveKey('documents');
+  }
+}
+async function saveKey(k){
+  try{ await window.storage.set('wp_'+k, JSON.stringify(S[k]), false); }catch(e){ console.error('Gagal menyimpan', k, e); }
+}
+function seedDefaults(){
+  MILESTONES.forEach(m=>{
+    m.tasks.forEach(t=>{
+      S.checklist.items.push({id:uid(), task:t, milestone:m.id, dueDate:'', status:'TODO', priority:'MEDIUM', notes:''});
+    });
+  });
+  DEFAULT_DOCUMENTS.forEach(d=>{
+    S.documents.list.push({id:uid(), name:d.name, person:d.person, status:'BELUM', deadline:'', notes:''});
+  });
+}
+
+/* ============================= UTILITIES ============================= */
+function uid(){ return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
+function fmtRupiah(n){ n = Number(n||0); return 'Rp' + Math.round(n).toLocaleString('id-ID'); }
+function parseNum(v){ const n = Number(String(v||'').replace(/[^\d.-]/g,'')); return isNaN(n)?0:n; }
+function fmtDateID(str){ if(!str) return '—'; const d = new Date(str+(str.length<=10?'T00:00:00':'')); if(isNaN(d)) return str; return d.toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}); }
+function daysUntil(dateStr){ if(!dateStr) return null; const target = new Date(dateStr+'T00:00:00'); const now = new Date(); now.setHours(0,0,0,0); return Math.round((target-now)/86400000); }
+function addMonths(dateStr, months){ const d = new Date(dateStr+'T00:00:00'); d.setMonth(d.getMonth()-months); return d; }
+function addDaysBefore(dateStr, days){ const d = new Date(dateStr+'T00:00:00'); d.setDate(d.getDate()-days); return d; }
+function milestoneDate(m){ if(!S.settings.weddingDate) return null; return m.monthsBefore!=null ? addMonths(S.settings.weddingDate, m.monthsBefore) : addDaysBefore(S.settings.weddingDate, m.daysBefore); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function logActivity(text){ S.activity.log.unshift({id:uid(), ts:new Date().toISOString(), actor:currentUser==='Pria'?S.settings.groomName:S.settings.brideName, text}); if(S.activity.log.length>150) S.activity.log.length=150; saveKey('activity'); }
+function render(){ renderNav(); renderPage(); }
+
+/* ============================= LOGIN ============================= */
+function renderLogin(){
+  document.getElementById('who-btns').innerHTML = `
+    <button class="who-btn" onclick="App.login('Pria')"><span>${esc(S.settings.groomName)||'Mempelai Pria'}</span><span class="tag">Pria</span></button>
+    <button class="who-btn" onclick="App.login('Wanita')"><span>${esc(S.settings.brideName)||'Mempelai Wanita'}</span><span class="tag">Wanita</span></button>
+  `;
+}
+
+/* ============================= NAV ============================= */
+function renderNav(){
+  document.getElementById('brand-names').innerHTML = `${esc(S.settings.groomName||'Pria')} <small>&amp; ${esc(S.settings.brideName||'Wanita')}</small>`;
+  document.getElementById('who-label').textContent = 'Masuk sebagai ' + (currentUser==='Pria'?S.settings.groomName:S.settings.brideName);
+  document.getElementById('nav').innerHTML = PAGES.map(p=>`
+    <button class="nav-item ${currentPage===p.id?'active':''}" onclick="App.goTo('${p.id}')">
+      <span class="ic">${p.icon}</span> ${p.label}
+    </button>`).join('');
+  document.getElementById('bn-scroll').innerHTML = PAGES.filter(p=>['dashboard','budget','savings','checklist','guests','vendors'].includes(p.id)).map(p=>`
+    <button class="bn-item ${currentPage===p.id?'active':''}" onclick="App.goTo('${p.id}')"><span class="ic">${p.icon}</span>${p.label}</button>`).join('');
+}
+
+function renderPage(){
+  const map = {
+    dashboard: pageDashboard, budget: pageBudget, savings: pageSavings, checklist: pageChecklist,
+    guests: pageGuests, vendors: pageVendors, documents: pageDocuments, items: pageItems,
+    honeymoon: pageHoneymoon, gifts: pageGifts, settings: pageSettings,
+  };
+  document.getElementById('main').innerHTML = (map[currentPage]||pageDashboard)();
+}
+
+/* ============================= COMPUTATIONS ============================= */
+function calcSavings(){
+  const groom = S.savings.transactions.filter(t=>t.person==='Pria').reduce((a,b)=>a+parseNum(b.amount),0);
+  const bride = S.savings.transactions.filter(t=>t.person==='Wanita').reduce((a,b)=>a+parseNum(b.amount),0);
+  return {groom, bride, total: groom+bride};
+}
+function calcBudget(){
+  const items = S.budget.items;
+  const estimated = items.reduce((a,b)=>a+parseNum(b.estimated),0);
+  const actual = items.reduce((a,b)=>a+parseNum(b.actual),0);
+  const paid = items.reduce((a,b)=>a+parseNum(b.paid),0);
+  const remaining = items.reduce((a,b)=>a+(parseNum(b.actual)-parseNum(b.paid)),0);
+  return {estimated, actual, paid, remaining, variance: estimated-actual};
+}
+function budgetStatus(item){
+  const actual = parseNum(item.actual), paid = parseNum(item.paid);
+  if(paid<=0) return 'UNPAID'; if(paid>=actual && actual>0) return 'PAID'; return 'PARTIAL';
+}
+function calcChecklist(){ const items=S.checklist.items; const done=items.filter(i=>i.status==='COMPLETED').length; return {done, total:items.length, pct: items.length? Math.round(done/items.length*100):0}; }
+function calcDocuments(){ const items=S.documents.list; const done=items.filter(i=>i.status==='SELESAI').length; return {done, total:items.length, pct: items.length? Math.round(done/items.length*100):0}; }
+function calcVendors(){ const items=S.vendors.list; const done=items.filter(i=>['DIPILIH','KONTRAK'].includes(i.status)).length; return {done,total:items.length, pct: items.length? Math.round(done/items.length*100):0}; }
+function calcGuests(){
+  const list = S.guests.list;
+  const invited = list.reduce((a,b)=>a+parseNum(b.invited||1),0);
+  const attending = list.filter(g=>g.rsvp==='HADIR').reduce((a,b)=>a+parseNum(b.attending||b.invited||1),0);
+  const declined = list.filter(g=>g.rsvp==='TIDAK_HADIR').length;
+  const pending = list.filter(g=>g.rsvp==='PENDING').length;
+  return {invited, attending, declined, pending, count:list.length};
+}
+function calcGifts(){
+  const list = S.gifts.list;
+  const cash = list.filter(g=>g.type==='TUNAI').reduce((a,b)=>a+parseNum(b.amount),0);
+  const transfer = list.filter(g=>g.type==='TRANSFER').reduce((a,b)=>a+parseNum(b.amount),0);
+  const physical = list.filter(g=>g.type==='BARANG').reduce((a,b)=>a+parseNum(b.amount),0);
+  return {cash, transfer, physical, total: cash+transfer+physical};
+}
+function currentPhase(){
+  if(!S.settings.weddingDate) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  let phase = MILESTONES[MILESTONES.length-1];
+  for(const m of MILESTONES){ const d = milestoneDate(m); if(d && d>=today){ phase = m; break; } }
+  return phase;
+}
+function preparationScore(){
+  const c = calcChecklist(), d = calcDocuments(), v = calcVendors(), g = calcGuests(), b = calcBudget();
+  const finPct = b.estimated>0 ? Math.min(100, Math.round(b.paid/b.estimated*100)) : 0;
+  const guestPct = g.count>0 ? Math.round(((g.attending+ (g.count-g.pending-g.declined? 0:0))/g.invited||0)*100) : 0;
+  const rsvpPct = g.invited>0 ? Math.round((g.attending/g.invited)*100) : 0;
+  const parts = [c.pct, d.pct, v.pct, rsvpPct, finPct];
+  return Math.round(parts.reduce((a,b)=>a+b,0)/parts.length);
+}
+
+/* ============================= GENERIC UI HELPERS ============================= */
+function badge(text, tone){ return `<span class="badge ${tone}">${esc(text)}</span>`; }
+function statusBadge(status){
+  const map = {
+    UNPAID:['Belum Bayar','danger'], PARTIAL:['Sebagian','warn'], PAID:['Lunas','success'],
+    TODO:['Belum Mulai','danger'], IN_PROGRESS:['Berjalan','warn'], COMPLETED:['Selesai','success'],
+    PENDING:['Menunggu','warn'], HADIR:['Hadir','success'], TIDAK_HADIR:['Tidak Hadir','danger'],
+    BELUM_HUBUNGI:['Belum Dihubungi','neutral'], DIHUBUNGI:['Dihubungi','warn'], NEGOSIASI:['Negosiasi','warn'],
+    DIPILIH:['Dipilih','success'], KONTRAK:['Kontrak Ditandatangani','success'], BATAL:['Dibatalkan','danger'],
+    BELUM:['Belum Mulai','danger'], PROSES:['Diproses','warn'], SIAP:['Siap','warn'], DIAJUKAN:['Diajukan','warn'], SELESAI:['Selesai','success'],
+    PLANNED:['Direncanakan','neutral'], PURCHASED:['Dibeli','warn'], PREPARED:['Disiapkan','warn'],
+  };
+  const [label, tone] = map[status] || [status,'neutral'];
+  return badge(label, tone);
+}
+function priorityBadge(p){ const map={LOW:['Rendah','neutral'],MEDIUM:['Sedang','warn'],HIGH:['Tinggi','danger']}; const [l,t]=map[p]||[p,'neutral']; return badge(l,t); }
+
+function emptyState(text, btnLabel, onClick){
+  return `<div class="empty-state"><p>${esc(text)}</p><button class="btn primary" onclick="${onClick}">+ ${esc(btnLabel)}</button></div>`;
+}
+
+function toolbar(searchId, placeholder, filtersHtml, addLabel, addFn){
+  return `<div class="toolbar">
+    <div class="filters">
+      <input class="search-input" id="${searchId}" placeholder="${esc(placeholder)}" oninput="App.reRenderPage()">
+      ${filtersHtml||''}
+    </div>
+    <button class="btn primary" onclick="${addFn}">+ ${esc(addLabel)}</button>
+  </div>`;
+}
+
+/* ---- Modal form engine ---- */
+function openForm(title, fields, initial, onSubmit){
+  const values = Object.assign({}, initial);
+  const html = `
+    <div class="modal-head"><h3>${esc(title)}</h3><button class="btn ghost icon-only" onclick="App.closeModal()">✕</button></div>
+    <form id="dyn-form">
+      ${fields.map(f=>{
+        if(f.row){
+          return `<div class="field-row">${f.row.map(ff=>fieldHtml(ff, values)).join('')}</div>`;
+        }
+        return fieldHtml(f, values);
+      }).join('')}
+      <div class="modal-actions">
+        <button type="button" class="btn" onclick="App.closeModal()">Batal</button>
+        <button type="submit" class="btn primary">Simpan</button>
+      </div>
+    </form>`;
+  document.getElementById('modal-panel').innerHTML = html;
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('dyn-form').onsubmit = (e)=>{
+    e.preventDefault();
+    const out = {};
+    fields.flatMap(f=>f.row?f.row:[f]).forEach(f=>{
+      const el = document.getElementById('f_'+f.key);
+      out[f.key] = f.type==='number' ? parseNum(el.value) : el.value;
+    });
+    onSubmit(out);
+    App.closeModal();
+  };
+}
+function fieldHtml(f, values){
+  const val = values[f.key]!=null?values[f.key]:'';
+  if(f.type==='select'){
+    return `<div class="field"><label>${esc(f.label)}</label><select id="f_${f.key}">${f.options.map(o=>`<option value="${esc(o.value)}" ${o.value===val?'selected':''}>${esc(o.label)}</option>`).join('')}</select></div>`;
+  }
+  if(f.type==='textarea'){
+    return `<div class="field"><label>${esc(f.label)}</label><textarea id="f_${f.key}">${esc(val)}</textarea></div>`;
+  }
+  return `<div class="field"><label>${esc(f.label)}</label><input type="${f.type||'text'}" id="f_${f.key}" value="${esc(val)}" ${f.step?`step="${f.step}"`:''}></div>`;
+}
+function openConfirm(message, onConfirm){
+  document.getElementById('modal-panel').innerHTML = `
+    <div class="confirm-panel">
+      <h3>Konfirmasi</h3>
+      <p style="color:var(--text-soft);font-size:0.9rem;margin:10px 0 18px;">${esc(message)}</p>
+      <div class="modal-actions">
+        <button class="btn" onclick="App.closeModal()">Batal</button>
+        <button class="btn danger" id="confirm-yes">Hapus</button>
+      </div>
+    </div>`;
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('backdrop').classList.add('open');
+  document.getElementById('confirm-yes').onclick = ()=>{ onConfirm(); App.closeModal(); };
+}
+
+/* ============================= DASHBOARD ============================= */
+function pageDashboard(){
+  const sv = calcSavings(), bg = calcBudget(), cl = calcChecklist(), doc = calcDocuments(), vd = calcVendors(), gs = calcGuests(), gf = calcGifts();
+  const days = daysUntil(S.settings.weddingDate);
+  const additionalNeeded = Math.max(0, bg.estimated - sv.total);
+  const phase = currentPhase();
+  const upcoming = S.checklist.items.filter(i=>i.status!=='COMPLETED').map(i=>({...i, due: i.dueDate || (MILESTONES.find(m=>m.id===i.milestone) ? milestoneDate(MILESTONES.find(m=>m.id===i.milestone)) : null)}))
+    .sort((a,b)=> (a.due?new Date(a.due):Infinity) - (b.due?new Date(b.due):Infinity)).slice(0,5);
+  const recentTx = [...S.savings.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+
+  const insights = [];
+  if(bg.estimated>0) insights.push(`Tabungan sudah mencapai ${Math.round(sv.total/bg.estimated*100)}% dari estimasi anggaran.`);
+  const dueSoonVendors = S.vendors.list.filter(v=>{ if(!v.dueDate) return false; const d = daysUntil(v.dueDate); return d!=null && d>=0 && d<=30; });
+  if(dueSoonVendors.length) insights.push(`Ada ${dueSoonVendors.length} pembayaran vendor jatuh tempo dalam 30 hari ke depan.`);
+  const overdue = S.checklist.items.filter(i=>{ if(i.status==='COMPLETED') return false; const m=MILESTONES.find(mm=>mm.id===i.milestone); const d=i.dueDate||(m?milestoneDate(m):null); return d && daysUntil(typeof d==='string'?d:d.toISOString().slice(0,10))<0; });
+  if(overdue.length) insights.push(`${overdue.length} item checklist sudah melewati tenggat waktu.`);
+  if(S.budget.items.length){
+    const byCat = {};
+    S.budget.items.forEach(i=>{ byCat[i.category]=(byCat[i.category]||0)+parseNum(i.actual); });
+    const top = Object.entries(byCat).sort((a,b)=>b[1]-a[1])[0];
+    if(top) insights.push(`Kategori anggaran terbesar saat ini: ${top[0]}.`);
+  }
+  if(gs.invited>0) insights.push(`${gs.pending} dari ${gs.invited} tamu yang diundang belum memberi konfirmasi.`);
+  if(!insights.length) insights.push('Mulai lengkapi data anggaran, tabungan, dan checklist agar ringkasan ini terisi otomatis.');
+
+  return `
+  <div class="hero-countdown">
+    <div>
+      <div class="names-line">${esc(S.settings.groomName)} &amp; ${esc(S.settings.brideName)}</div>
+      <div class="date-line">${S.settings.weddingDate? fmtDateID(S.settings.weddingDate) : 'Tanggal pernikahan belum diatur'} ${S.settings.location?'· '+esc(S.settings.location):''}</div>
+    </div>
+    <div style="text-align:right;">
+      <div class="days-num">${days==null?'—':(days<0?'0':days)}</div>
+      <div class="days-label">${days==null?'atur tanggal di Pengaturan':(days<0?'Selamat menempuh hidup baru':'hari lagi')}</div>
+    </div>
+  </div>
+
+  <div class="grid grid-4">
+    <div class="card stat-card"><div class="label">Estimasi Anggaran</div><div class="value">${fmtRupiah(S.settings.budgetTarget||bg.estimated)}</div></div>
+    <div class="card stat-card accent"><div class="label">Total Tabungan</div><div class="value">${fmtRupiah(sv.total)}</div></div>
+    <div class="card stat-card warn"><div class="label">Total Terpakai</div><div class="value">${fmtRupiah(bg.paid)}</div></div>
+    <div class="card stat-card ${additionalNeeded>0?'danger':'accent'}"><div class="label">Dana Tambahan Dibutuhkan</div><div class="value">${fmtRupiah(additionalNeeded)}</div></div>
+  </div>
+
+  <div class="section-title"><h3>Progres Persiapan</h3><span class="badge neutral">Preparation Progress · ${preparationScore()}%</span></div>
+  <div class="grid grid-3">
+    <div class="card">
+      <div class="kv-mini"><span>Checklist</span><strong>${cl.done}/${cl.total}</strong></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${cl.pct}%"></div></div>
+      <div class="kv-mini" style="margin-top:12px;"><span>Dokumen</span><strong>${doc.done}/${doc.total}</strong></div>
+      <div class="progress-track"><div class="progress-fill gold" style="width:${doc.pct}%"></div></div>
+    </div>
+    <div class="card">
+      <div class="kv-mini"><span>Vendor terkonfirmasi</span><strong>${vd.done}/${vd.total}</strong></div>
+      <div class="progress-track"><div class="progress-fill" style="width:${vd.pct}%"></div></div>
+      <div class="kv-mini" style="margin-top:12px;"><span>RSVP Tamu</span><strong>${gs.attending}/${gs.invited||0}</strong></div>
+      <div class="progress-track"><div class="progress-fill gold" style="width:${gs.invited?Math.round(gs.attending/gs.invited*100):0}%"></div></div>
+    </div>
+    <div class="card">
+      <div class="kv-mini"><span>Fase saat ini</span><strong>${phase?phase.label:'—'}</strong></div>
+      <div class="kv-mini"><span>Sisa pembayaran vendor</span><strong>${fmtRupiah(S.vendors.list.reduce((a,b)=>a+(parseNum(b.agreed)-parseNum(b.paid)),0))}</strong></div>
+      <div class="kv-mini"><span>Total kado/angpao</span><strong>${fmtRupiah(gf.total)}</strong></div>
+    </div>
+  </div>
+
+  <div class="grid grid-2" style="margin-top:26px;">
+    <div>
+      <div class="section-title"><h3>Tugas Berikutnya</h3><a href="javascript:void(0)" onclick="App.goTo('checklist')" style="font-size:0.82rem;color:var(--sage-dark);font-weight:700;">Lihat semua</a></div>
+      <div class="list-card">
+        ${upcoming.length? upcoming.map(t=>`
+          <div class="list-row">
+            <div><div class="main-txt">${esc(t.task)}</div><div class="sub-txt">${t.due? 'Target: '+fmtDateID(typeof t.due==='string'?t.due:t.due.toISOString().slice(0,10)) : 'Belum ada tenggat'}</div></div>
+            ${priorityBadge(t.priority)}
+          </div>`).join('') : emptyState('Belum ada tugas checklist.', 'Buka Checklist', "App.goTo('checklist')")}
+      </div>
+    </div>
+    <div>
+      <div class="section-title"><h3>Aktivitas Keuangan Terbaru</h3><a href="javascript:void(0)" onclick="App.goTo('savings')" style="font-size:0.82rem;color:var(--sage-dark);font-weight:700;">Lihat semua</a></div>
+      <div class="list-card">
+        ${recentTx.length? recentTx.map(t=>`
+          <div class="list-row">
+            <div><div class="main-txt">${t.person==='Pria'?esc(S.settings.groomName):esc(S.settings.brideName)}</div><div class="sub-txt">${fmtDateID(t.date)} ${t.note?'· '+esc(t.note):''}</div></div>
+            <div class="cell-strong" style="color:var(--sage-dark);">+ ${fmtRupiah(t.amount)}</div>
+          </div>`).join('') : emptyState('Belum ada setoran tabungan.', 'Tambah Setoran', "App.goTo('savings')")}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title"><h3>Wawasan Otomatis</h3></div>
+  <div class="insight-list">
+    ${insights.map(i=>`<div class="insight-item"><div class="dot"></div><div>${esc(i)}</div></div>`).join('')}
+  </div>
+  `;
+}
+
+/* ============================= BUDGET ============================= */
+function pageBudget(){
+  const b = calcBudget();
+  const search = (document.getElementById('budget-search')?.value||'').toLowerCase();
+  const catFilter = document.getElementById('budget-cat-filter')?.value||'';
+  let rows = S.budget.items.filter(i=> (!search || i.name.toLowerCase().includes(search)) && (!catFilter || i.category===catFilter) );
+  const byCat = {};
+  S.budget.items.forEach(i=>{ byCat[i.category]=(byCat[i.category]||0)+parseNum(i.actual); });
+  const maxCat = Math.max(1, ...Object.values(byCat));
+
+  return `
+  <div class="page-head"><h1>Anggaran Pernikahan</h1><p class="desc">Lacak estimasi, realisasi, dan sisa pembayaran setiap pos anggaran.</p></div>
+  <div class="grid grid-4">
+    <div class="card stat-card"><div class="label">Estimasi Total</div><div class="value">${fmtRupiah(b.estimated)}</div></div>
+    <div class="card stat-card warn"><div class="label">Realisasi Total</div><div class="value">${fmtRupiah(b.actual)}</div></div>
+    <div class="card stat-card accent"><div class="label">Sudah Dibayar</div><div class="value">${fmtRupiah(b.paid)}</div></div>
+    <div class="card stat-card ${b.remaining>0?'danger':'accent'}"><div class="label">Sisa Pembayaran</div><div class="value">${fmtRupiah(b.remaining)}</div></div>
+  </div>
+
+  <div class="section-title"><h3>Pengeluaran per Kategori</h3></div>
+  <div class="card">
+    ${Object.keys(byCat).length? Object.entries(byCat).sort((a,b)=>b[1]-a[1]).map(([cat,val])=>`
+      <div style="margin-bottom:10px;">
+        <div class="kv-mini"><span>${esc(cat)}</span><strong>${fmtRupiah(val)}</strong></div>
+        <div class="progress-track"><div class="progress-fill gold" style="width:${Math.round(val/maxCat*100)}%"></div></div>
+      </div>`).join('') : `<p style="color:var(--text-soft);margin:0;">Belum ada data pengeluaran.</p>`}
+  </div>
+
+  <div class="section-title"><h3>Rincian Pos Anggaran</h3></div>
+  ${toolbar('budget-search','Cari pos anggaran...', `<select class="filter-select" id="budget-cat-filter" onchange="App.reRenderPage()"><option value="">Semua kategori</option>${S.budget.categories.map(c=>`<option ${c===catFilter?'selected':''}>${esc(c)}</option>`).join('')}</select>`, 'Tambah Pos', 'App.newBudgetItem()')}
+  ${rows.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Item</th><th>Kategori</th><th>Estimasi</th><th>Realisasi</th><th>Dibayar</th><th>Sisa</th><th>Status</th><th></th></tr></thead><tbody>
+    ${rows.map(i=>`<tr>
+      <td class="cell-strong">${esc(i.name)}<div class="cell-soft">${esc(i.vendor||'')}</div></td>
+      <td>${esc(i.category)}</td>
+      <td>${fmtRupiah(i.estimated)}</td>
+      <td>${fmtRupiah(i.actual)}</td>
+      <td>${fmtRupiah(i.paid)}</td>
+      <td>${fmtRupiah(parseNum(i.actual)-parseNum(i.paid))}</td>
+      <td>${statusBadge(budgetStatus(i))}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editBudgetItem('${i.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteBudgetItem('${i.id}')">Hapus</button></td>
+    </tr>`).join('')}
+  </tbody></table></div>` : emptyState('Belum ada pos anggaran yang ditambahkan.', 'Tambah Pos', 'App.newBudgetItem()')}
+  `;
+}
+
+/* ============================= SAVINGS ============================= */
+function pageSavings(){
+  const sv = calcSavings();
+  const target = S.settings.savingsTarget||0;
+  const pct = target>0? Math.min(100, Math.round(sv.total/target*100)):0;
+  const rows = [...S.savings.transactions].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  return `
+  <div class="page-head"><h1>Tabungan Pernikahan</h1><p class="desc">Setoran dari kedua pihak dijumlahkan otomatis menjadi total tabungan.</p></div>
+  <div class="grid grid-3">
+    <div class="card stat-card"><div class="label">Tabungan ${esc(S.settings.groomName)}</div><div class="value">${fmtRupiah(sv.groom)}</div></div>
+    <div class="card stat-card"><div class="label">Tabungan ${esc(S.settings.brideName)}</div><div class="value">${fmtRupiah(sv.bride)}</div></div>
+    <div class="card stat-card accent"><div class="label">Total Tabungan</div><div class="value">${fmtRupiah(sv.total)}</div></div>
+  </div>
+  <div class="card" style="margin-top:16px;">
+    <div class="kv-mini"><span>Target Dana Pernikahan</span><strong>${fmtRupiah(target)}</strong></div>
+    <div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="kv-mini" style="margin-top:8px;"><span>Progres</span><strong>${pct}%</strong></div>
+    <div class="kv-mini"><span>Sisa menuju target</span><strong>${fmtRupiah(Math.max(0,target-sv.total))}</strong></div>
+  </div>
+  <div class="section-title"><h3>Riwayat Setoran</h3></div>
+  ${toolbar('savings-search','Cari catatan...', '', 'Tambah Setoran', 'App.newSavingsTx()')}
+  ${(()=>{ const search=(document.getElementById('savings-search')?.value||'').toLowerCase(); const filtered = rows.filter(t=>!search || (t.note||'').toLowerCase().includes(search));
+    return filtered.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Tanggal</th><th>Penyetor</th><th>Jumlah</th><th>Catatan</th><th></th></tr></thead><tbody>
+    ${filtered.map(t=>`<tr>
+      <td>${fmtDateID(t.date)}</td>
+      <td>${t.person==='Pria'?esc(S.settings.groomName):esc(S.settings.brideName)}</td>
+      <td class="cell-strong" style="color:var(--sage-dark);">${fmtRupiah(t.amount)}</td>
+      <td>${esc(t.note||'—')}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editSavingsTx('${t.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteSavingsTx('${t.id}')">Hapus</button></td>
+    </tr>`).join('')}</tbody></table></div>` : emptyState('Belum ada setoran tabungan.', 'Tambah Setoran', 'App.newSavingsTx()'); })()}
+  `;
+}
+
+/* ============================= CHECKLIST ============================= */
+function pageChecklist(){
+  const cl = calcChecklist();
+  const phase = currentPhase();
+  const filter = document.getElementById('checklist-filter')?.value || 'ALL';
+  return `
+  <div class="page-head"><h1>Checklist Persiapan</h1><p class="desc">${phase? `Fase saat ini: <strong>${esc(phase.label)}</strong>` : 'Atur tanggal pernikahan di Pengaturan agar fase dihitung otomatis.'}</p></div>
+  <div class="grid grid-3">
+    <div class="card stat-card accent"><div class="label">Selesai</div><div class="value">${cl.done}/${cl.total}</div></div>
+    <div class="card stat-card"><div class="label">Progres</div><div class="value">${cl.pct}%</div></div>
+    <div class="card stat-card warn"><div class="label">Tertunda</div><div class="value">${S.checklist.items.filter(i=>i.status!=='COMPLETED').length}</div></div>
+  </div>
+  ${toolbar('checklist-search','Cari tugas...', `<select class="filter-select" id="checklist-filter" onchange="App.reRenderPage()">
+      <option value="ALL" ${filter==='ALL'?'selected':''}>Semua status</option>
+      <option value="TODO" ${filter==='TODO'?'selected':''}>Belum Mulai</option>
+      <option value="IN_PROGRESS" ${filter==='IN_PROGRESS'?'selected':''}>Berjalan</option>
+      <option value="COMPLETED" ${filter==='COMPLETED'?'selected':''}>Selesai</option>
+    </select>`, 'Tambah Tugas', 'App.newChecklistItem()')}
+  ${MILESTONES.map(m=>{
+    const search=(document.getElementById('checklist-search')?.value||'').toLowerCase();
+    let items = S.checklist.items.filter(i=>i.milestone===m.id && (!search||i.task.toLowerCase().includes(search)) && (filter==='ALL'||i.status===filter));
+    if(!items.length) return '';
+    const d = milestoneDate(m);
+    return `<div class="milestone-block">
+      <div class="milestone-head"><h3>${esc(m.label)}</h3>${d?`<span class="phase-badge">${fmtDateID(d.toISOString().slice(0,10))}</span>`:''}${phase&&phase.id===m.id?`<span class="badge success">Fase aktif</span>`:''}</div>
+      ${items.map(i=>`
+        <div class="check-row ${i.status==='COMPLETED'?'done':''}">
+          <button class="ctick" onclick="App.toggleChecklist('${i.id}')">${i.status==='COMPLETED'?'✓':''}</button>
+          <div class="txt">${esc(i.task)}${i.notes?`<div class="cell-soft">${esc(i.notes)}</div>`:''}</div>
+          <div class="meta">${i.dueDate?fmtDateID(i.dueDate):''}</div>
+          ${priorityBadge(i.priority)}
+          <div class="row-actions"><button class="btn ghost small" onclick="App.editChecklistItem('${i.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteChecklistItem('${i.id}')">Hapus</button></div>
+        </div>`).join('')}
+    </div>`;
+  }).join('') || emptyState('Belum ada tugas checklist yang cocok dengan filter.', 'Tambah Tugas', 'App.newChecklistItem()')}
+  `;
+}
+
+/* ============================= GUESTS ============================= */
+function pageGuests(){
+  const gs = calcGuests();
+  const search = (document.getElementById('guests-search')?.value||'').toLowerCase();
+  const rsvpFilter = document.getElementById('guests-rsvp-filter')?.value||'';
+  const rows = S.guests.list.filter(g=>(!search||g.name.toLowerCase().includes(search)) && (!rsvpFilter||g.rsvp===rsvpFilter));
+  return `
+  <div class="page-head"><h1>Tamu &amp; RSVP</h1><p class="desc">Kelola daftar tamu dan pantau konfirmasi kehadiran.</p></div>
+  <div class="grid grid-4">
+    <div class="card stat-card"><div class="label">Total Diundang</div><div class="value">${gs.invited}</div></div>
+    <div class="card stat-card accent"><div class="label">Konfirmasi Hadir</div><div class="value">${gs.attending}</div></div>
+    <div class="card stat-card warn"><div class="label">Menunggu Konfirmasi</div><div class="value">${gs.pending}</div></div>
+    <div class="card stat-card danger"><div class="label">Tidak Hadir</div><div class="value">${gs.declined}</div></div>
+  </div>
+  ${toolbar('guests-search','Cari nama tamu...', `<select class="filter-select" id="guests-rsvp-filter" onchange="App.reRenderPage()"><option value="">Semua RSVP</option><option value="PENDING" ${rsvpFilter==='PENDING'?'selected':''}>Menunggu</option><option value="HADIR" ${rsvpFilter==='HADIR'?'selected':''}>Hadir</option><option value="TIDAK_HADIR" ${rsvpFilter==='TIDAK_HADIR'?'selected':''}>Tidak Hadir</option></select>`, 'Tambah Tamu', 'App.newGuest()')}
+  ${rows.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Nama</th><th>Kategori</th><th>Pihak</th><th>Telepon</th><th>Diundang</th><th>RSVP</th><th></th></tr></thead><tbody>
+    ${rows.map(g=>`<tr>
+      <td class="cell-strong">${esc(g.name)}</td>
+      <td>${esc(g.category)}</td>
+      <td>${esc(g.side)}</td>
+      <td>${esc(g.phone||'—')}</td>
+      <td>${parseNum(g.invited||1)}</td>
+      <td>${statusBadge(g.rsvp)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editGuest('${g.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteGuest('${g.id}')">Hapus</button></td>
+    </tr>`).join('')}
+  </tbody></table></div>` : emptyState('Belum ada tamu.', 'Tambah Tamu', 'App.newGuest()')}
+  `;
+}
+
+/* ============================= VENDORS ============================= */
+function pageVendors(){
+  const search = (document.getElementById('vendors-search')?.value||'').toLowerCase();
+  const statusFilter = document.getElementById('vendors-status-filter')?.value||'';
+  const rows = S.vendors.list.filter(v=>(!search||v.name.toLowerCase().includes(search)) && (!statusFilter||v.status===statusFilter));
+  const totalAgreed = S.vendors.list.reduce((a,b)=>a+parseNum(b.agreed),0);
+  const totalPaid = S.vendors.list.reduce((a,b)=>a+parseNum(b.paid),0);
+  return `
+  <div class="page-head"><h1>Vendor</h1><p class="desc">Pantau status kontrak dan pembayaran setiap vendor.</p></div>
+  <div class="grid grid-3">
+    <div class="card stat-card"><div class="label">Total Disepakati</div><div class="value">${fmtRupiah(totalAgreed)}</div></div>
+    <div class="card stat-card accent"><div class="label">Sudah Dibayar</div><div class="value">${fmtRupiah(totalPaid)}</div></div>
+    <div class="card stat-card ${totalAgreed-totalPaid>0?'danger':'accent'}"><div class="label">Sisa Pembayaran</div><div class="value">${fmtRupiah(totalAgreed-totalPaid)}</div></div>
+  </div>
+  ${toolbar('vendors-search','Cari vendor...', `<select class="filter-select" id="vendors-status-filter" onchange="App.reRenderPage()"><option value="">Semua status</option>
+      <option value="BELUM_HUBUNGI">Belum Dihubungi</option><option value="DIHUBUNGI">Dihubungi</option><option value="NEGOSIASI">Negosiasi</option><option value="DIPILIH">Dipilih</option><option value="KONTRAK">Kontrak</option><option value="BATAL">Dibatalkan</option>
+    </select>`, 'Tambah Vendor', 'App.newVendor()')}
+  ${rows.length? rows.map(v=>`
+    <div class="card" style="margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <h3>${esc(v.name)}</h3>
+          <div class="cell-soft">${esc(v.category)} ${v.contact?'· '+esc(v.contact):''} ${v.phone?'· '+esc(v.phone):''}</div>
+        </div>
+        <div style="text-align:right;">${statusBadge(v.status)}<div class="row-actions" style="margin-top:8px;"><button class="btn ghost small" onclick="App.editVendor('${v.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteVendor('${v.id}')">Hapus</button></div></div>
+      </div>
+      <div class="grid grid-4" style="margin-top:12px;">
+        <div class="kv-mini"><span>Estimasi</span><strong>${fmtRupiah(v.estimated)}</strong></div>
+        <div class="kv-mini"><span>Disepakati</span><strong>${fmtRupiah(v.agreed)}</strong></div>
+        <div class="kv-mini"><span>Dibayar</span><strong>${fmtRupiah(v.paid)}</strong></div>
+        <div class="kv-mini"><span>Sisa</span><strong>${fmtRupiah(parseNum(v.agreed)-parseNum(v.paid))}</strong></div>
+      </div>
+      ${v.notes?`<p class="cell-soft" style="margin-top:8px;">${esc(v.notes)}</p>`:''}
+    </div>`).join('') : emptyState('Belum ada vendor yang ditambahkan.', 'Tambah Vendor', 'App.newVendor()')}
+  `;
+}
+
+/* ============================= DOCUMENTS ============================= */
+function pageDocuments(){
+  const doc = calcDocuments();
+  const rows = S.documents.list;
+  return `
+  <div class="page-head"><h1>Dokumen Pernikahan</h1><p class="desc">Lacak kelengkapan dokumen menuju pendaftaran nikah.</p></div>
+  <div class="disclaimer">Persyaratan dokumen dapat berbeda sesuai kondisi calon pengantin dan ketentuan KUA setempat. Selalu verifikasi langsung dengan KUA kecamatan terkait.</div>
+  <div class="grid grid-3">
+    <div class="card stat-card accent"><div class="label">Dokumen Selesai</div><div class="value">${doc.done}/${doc.total}</div></div>
+    <div class="card stat-card"><div class="label">Progres</div><div class="value">${doc.pct}%</div></div>
+    <div class="card stat-card warn"><div class="label">Belum Lengkap</div><div class="value">${doc.total-doc.done}</div></div>
+  </div>
+  <div class="progress-track" style="margin:14px 0 20px;"><div class="progress-fill" style="width:${doc.pct}%"></div></div>
+  ${toolbar('documents-search','Cari dokumen...', '', 'Tambah Dokumen', 'App.newDocument()')}
+  ${(()=>{ const search=(document.getElementById('documents-search')?.value||'').toLowerCase(); const filtered = rows.filter(d=>!search||d.name.toLowerCase().includes(search));
+    return filtered.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Dokumen</th><th>Pihak</th><th>Tenggat</th><th>Status</th><th></th></tr></thead><tbody>
+    ${filtered.map(d=>`<tr>
+      <td class="cell-strong">${esc(d.name)}${d.notes?`<div class="cell-soft">${esc(d.notes)}</div>`:''}</td>
+      <td>${esc(d.person)}</td>
+      <td>${d.deadline?fmtDateID(d.deadline):'—'}</td>
+      <td>${statusBadge(d.status)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editDocument('${d.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteDocument('${d.id}')">Hapus</button></td>
+    </tr>`).join('')}</tbody></table></div>` : emptyState('Belum ada dokumen tercatat.', 'Tambah Dokumen', 'App.newDocument()'); })()}
+  `;
+}
+
+/* ============================= MAHAR / SESERAHAN / SOUVENIR ============================= */
+function pageItems(){
+  const tab = activeTab.items || 'mahar';
+  function simpleTable(list, addFn, editFn, delFn, showTotal){
+    if(!list.length) return emptyState('Belum ada item.', 'Tambah Item', addFn+'()');
+    return `<div class="table-wrap"><table class="data-table"><thead><tr><th>Nama Barang</th><th>Jumlah</th>${showTotal?'<th>Harga Satuan</th><th>Total</th>':'<th>Estimasi</th><th>Realisasi</th>'}<th>Status</th><th></th></tr></thead><tbody>
+      ${list.map(i=>`<tr>
+        <td class="cell-strong">${esc(i.name)}</td>
+        <td>${parseNum(i.qty)}</td>
+        ${showTotal? `<td>${fmtRupiah(i.unitPrice)}</td><td>${fmtRupiah(parseNum(i.qty)*parseNum(i.unitPrice))}</td>` : `<td>${fmtRupiah(i.estimated)}</td><td>${fmtRupiah(i.actual)}</td>`}
+        <td>${statusBadge(i.status)}</td>
+        <td class="row-actions"><button class="btn ghost small" onclick="${editFn}('${i.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="${delFn}('${i.id}')">Hapus</button></td>
+      </tr>`).join('')}
+    </tbody></table></div>`;
+  }
+  const souvenirTotal = S.items.souvenir.reduce((a,b)=>a+parseNum(b.qty)*parseNum(b.unitPrice),0);
+  return `
+  <div class="page-head"><h1>Mahar, Seserahan &amp; Souvenir</h1><p class="desc">Catat kebutuhan barang beserta status pembelian.</p></div>
+  <div class="tabs">
+    <button class="tab-btn ${tab==='mahar'?'active':''}" onclick="App.setItemsTab('mahar')">Mahar</button>
+    <button class="tab-btn ${tab==='seserahan'?'active':''}" onclick="App.setItemsTab('seserahan')">Seserahan</button>
+    <button class="tab-btn ${tab==='souvenir'?'active':''}" onclick="App.setItemsTab('souvenir')">Souvenir</button>
+  </div>
+  ${tab==='mahar'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newItem('mahar')">+ Tambah Mahar</button></div>${simpleTable(S.items.mahar,'App.newItem','App.editItem','App.deleteItem',false)}`:''}
+  ${tab==='seserahan'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newItem('seserahan')">+ Tambah Seserahan</button></div>${simpleTable(S.items.seserahan,'App.newItem','App.editItem','App.deleteItem',false)}`:''}
+  ${tab==='souvenir'? `<div class="card" style="margin-bottom:14px;"><div class="kv-mini"><span>Total Biaya Souvenir</span><strong>${fmtRupiah(souvenirTotal)}</strong></div></div><div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newSouvenir()">+ Tambah Souvenir</button></div>${S.items.souvenir.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Nama</th><th>Jumlah</th><th>Harga Satuan</th><th>Total</th><th>Vendor</th><th>Status</th><th></th></tr></thead><tbody>
+      ${S.items.souvenir.map(i=>`<tr><td class="cell-strong">${esc(i.name)}</td><td>${parseNum(i.qty)}</td><td>${fmtRupiah(i.unitPrice)}</td><td>${fmtRupiah(parseNum(i.qty)*parseNum(i.unitPrice))}</td><td>${esc(i.vendor||'—')}</td><td>${statusBadge(i.status)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editSouvenir('${i.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteItem('souvenir','${i.id}')">Hapus</button></td></tr>`).join('')}
+    </tbody></table></div>` : emptyState('Belum ada souvenir.', 'Tambah Souvenir', 'App.newSouvenir()')}` : ''}
+  `;
+}
+
+/* ============================= HONEYMOON ============================= */
+function pageHoneymoon(){
+  const tab = activeTab.honeymoon || 'budget';
+  const hb = S.honeymoon.budget;
+  return `
+  <div class="page-head"><h1>Bulan Madu</h1><p class="desc">Rencanakan anggaran, tiket, penginapan, dan itinerary bulan madu.</p></div>
+  <div class="tabs">
+    <button class="tab-btn ${tab==='budget'?'active':''}" onclick="App.setHoneymoonTab('budget')">Anggaran</button>
+    <button class="tab-btn ${tab==='flights'?'active':''}" onclick="App.setHoneymoonTab('flights')">Penerbangan</button>
+    <button class="tab-btn ${tab==='hotels'?'active':''}" onclick="App.setHoneymoonTab('hotels')">Penginapan</button>
+    <button class="tab-btn ${tab==='docs'?'active':''}" onclick="App.setHoneymoonTab('docs')">Paspor/Visa</button>
+    <button class="tab-btn ${tab==='itinerary'?'active':''}" onclick="App.setHoneymoonTab('itinerary')">Itinerary</button>
+  </div>
+
+  ${tab==='budget'? `
+    <div class="grid grid-3">
+      <div class="card stat-card"><div class="label">Estimasi</div><div class="value">${fmtRupiah(hb.estimated)}</div></div>
+      <div class="card stat-card warn"><div class="label">Realisasi</div><div class="value">${fmtRupiah(hb.actual)}</div></div>
+      <div class="card stat-card accent"><div class="label">Dibayar</div><div class="value">${fmtRupiah(hb.paid)}</div></div>
+    </div>
+    <div class="toolbar" style="margin-top:16px;justify-content:flex-end;"><button class="btn primary" onclick="App.editHoneymoonBudget()">Ubah Anggaran</button></div>
+  ` : ''}
+
+  ${tab==='flights'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newFlight()">+ Tambah Penerbangan</button></div>
+    ${S.honeymoon.flights.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Maskapai</th><th>Rute</th><th>Tanggal</th><th>Kode Booking</th><th>Harga</th><th>Status</th><th></th></tr></thead><tbody>
+      ${S.honeymoon.flights.map(f=>`<tr><td class="cell-strong">${esc(f.airline)}</td><td>${esc(f.route)}</td><td>${f.date?fmtDateID(f.date):'—'} ${esc(f.time||'')}</td><td>${esc(f.bookingCode||'—')}</td><td>${fmtRupiah(f.price)}</td><td>${statusBadge(f.status)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editFlight('${f.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteHoneymoonSub('flights','${f.id}')">Hapus</button></td></tr>`).join('')}
+    </tbody></table></div>` : emptyState('Belum ada data penerbangan.', 'Tambah Penerbangan', 'App.newFlight()')}` : ''}
+
+  ${tab==='hotels'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newHotel()">+ Tambah Penginapan</button></div>
+    ${S.honeymoon.hotels.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Hotel</th><th>Lokasi</th><th>Check-in</th><th>Check-out</th><th>Harga</th><th>Status</th><th></th></tr></thead><tbody>
+      ${S.honeymoon.hotels.map(h=>`<tr><td class="cell-strong">${esc(h.name)}</td><td>${esc(h.location||'—')}</td><td>${h.checkin?fmtDateID(h.checkin):'—'}</td><td>${h.checkout?fmtDateID(h.checkout):'—'}</td><td>${fmtRupiah(h.price)}</td><td>${statusBadge(h.status)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editHotel('${h.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteHoneymoonSub('hotels','${h.id}')">Hapus</button></td></tr>`).join('')}
+    </tbody></table></div>` : emptyState('Belum ada data penginapan.', 'Tambah Penginapan', 'App.newHotel()')}` : ''}
+
+  ${tab==='docs'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newTravelDoc()">+ Tambah Dokumen</button></div>
+    ${S.honeymoon.travelDocs.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Dokumen</th><th>Tenggat</th><th>Status</th><th></th></tr></thead><tbody>
+      ${S.honeymoon.travelDocs.map(t=>`<tr><td class="cell-strong">${esc(t.name)}</td><td>${t.deadline?fmtDateID(t.deadline):'—'}</td><td>${statusBadge(t.status)}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editTravelDoc('${t.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteHoneymoonSub('travelDocs','${t.id}')">Hapus</button></td></tr>`).join('')}
+    </tbody></table></div>` : emptyState('Belum ada dokumen perjalanan tercatat.', 'Tambah Dokumen', 'App.newTravelDoc()')}` : ''}
+
+  ${tab==='itinerary'? `<div class="toolbar" style="justify-content:flex-end;"><button class="btn primary" onclick="App.newItineraryDay()">+ Tambah Hari</button></div>
+    ${S.honeymoon.itinerary.length? S.honeymoon.itinerary.sort((a,b)=>new Date(a.date)-new Date(b.date)).map((d,idx)=>`
+      <div class="card" style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;"><h3>Hari ${idx+1}${d.location?' · '+esc(d.location):''}</h3><div class="row-actions"><button class="btn ghost small" onclick="App.editItineraryDay('${d.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteHoneymoonSub('itinerary','${d.id}')">Hapus</button></div></div>
+        <div class="cell-soft">${d.date?fmtDateID(d.date):''}</div>
+        <div class="grid grid-3" style="margin-top:10px;">
+          <div class="kv-mini"><span>Pagi</span><strong>${esc(d.morning||'—')}</strong></div>
+          <div class="kv-mini"><span>Siang</span><strong>${esc(d.afternoon||'—')}</strong></div>
+          <div class="kv-mini"><span>Malam</span><strong>${esc(d.evening||'—')}</strong></div>
+        </div>
+        <div class="kv-mini" style="margin-top:6px;"><span>Perkiraan Biaya Hari Ini</span><strong>${fmtRupiah(d.budget)}</strong></div>
+      </div>`).join('') : emptyState('Belum ada itinerary.', 'Tambah Hari', 'App.newItineraryDay()')}` : ''}
+  `;
+}
+
+/* ============================= GIFTS ============================= */
+function pageGifts(){
+  const gf = calcGifts();
+  const rows = [...S.gifts.list].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  return `
+  <div class="page-head"><h1>Kado &amp; Angpao</h1><p class="desc">Catatan ini bersifat privat dan hanya terlihat oleh berdua.</p></div>
+  <div class="grid grid-4">
+    <div class="card stat-card"><div class="label">Tunai</div><div class="value">${fmtRupiah(gf.cash)}</div></div>
+    <div class="card stat-card"><div class="label">Transfer</div><div class="value">${fmtRupiah(gf.transfer)}</div></div>
+    <div class="card stat-card"><div class="label">Barang</div><div class="value">${fmtRupiah(gf.physical)}</div></div>
+    <div class="card stat-card accent"><div class="label">Total</div><div class="value">${fmtRupiah(gf.total)}</div></div>
+  </div>
+  ${toolbar('gifts-search','Cari nama pemberi...', '', 'Tambah Catatan', 'App.newGift()')}
+  ${(()=>{ const search=(document.getElementById('gifts-search')?.value||'').toLowerCase(); const filtered = rows.filter(g=>!search||g.guest.toLowerCase().includes(search));
+    return filtered.length? `<div class="table-wrap"><table class="data-table"><thead><tr><th>Nama Tamu</th><th>Tanggal</th><th>Jenis</th><th>Nilai</th><th>Catatan</th><th></th></tr></thead><tbody>
+    ${filtered.map(g=>`<tr><td class="cell-strong">${esc(g.guest)}</td><td>${fmtDateID(g.date)}</td><td>${esc({TUNAI:'Tunai',TRANSFER:'Transfer',BARANG:'Barang'}[g.type]||g.type)}</td><td>${fmtRupiah(g.amount)}</td><td>${esc(g.notes||'—')}</td>
+      <td class="row-actions"><button class="btn ghost small" onclick="App.editGift('${g.id}')">Ubah</button><button class="btn ghost small" style="color:var(--danger)" onclick="App.deleteGift('${g.id}')">Hapus</button></td></tr>`).join('')}</tbody></table></div>` : emptyState('Belum ada kado/angpao tercatat.', 'Tambah Catatan', 'App.newGift()'); })()}
+  `;
+}
+
+/* ============================= SETTINGS ============================= */
+function pageSettings(){
+  const s = S.settings;
+  return `
+  <div class="page-head"><h1>Pengaturan</h1><p class="desc">Data ini menjadi dasar perhitungan hitung mundur dan seluruh ringkasan di dasbor.</p></div>
+  <div class="card" style="max-width:560px;">
+    <div class="field-row"><div class="field"><label>Nama Mempelai Pria</label><input id="set_groomName" value="${esc(s.groomName)}"></div><div class="field"><label>Nama Mempelai Wanita</label><input id="set_brideName" value="${esc(s.brideName)}"></div></div>
+    <div class="field-row"><div class="field"><label>Tanggal Pernikahan (Resepsi)</label><input type="date" id="set_weddingDate" value="${esc(s.weddingDate)}"></div><div class="field"><label>Lokasi</label><input id="set_location" value="${esc(s.location)}"></div></div>
+    <div class="field-row"><div class="field"><label>Tanggal Lamaran</label><input type="date" id="set_engagementDate" value="${esc(s.engagementDate)}"></div><div class="field"><label>Tanggal Akad Nikah</label><input type="date" id="set_nikahDate" value="${esc(s.nikahDate)}"></div></div>
+    <div class="field-row"><div class="field"><label>Estimasi Anggaran Pernikahan</label><input type="number" id="set_budgetTarget" value="${s.budgetTarget||0}"></div><div class="field"><label>Target Tabungan</label><input type="number" id="set_savingsTarget" value="${s.savingsTarget||0}"></div></div>
+    <button class="btn primary" onclick="App.saveSettings()">Simpan Pengaturan</button>
+  </div>
+
+  <div class="section-title"><h3>Kategori Anggaran</h3></div>
+  <div class="card" style="max-width:560px;">
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+      ${S.budget.categories.map(c=>`<span class="badge neutral" style="display:inline-flex;align-items:center;gap:6px;">${esc(c)} <a href="javascript:void(0)" onclick="App.removeCategory('${esc(c)}')" style="color:var(--danger);font-weight:800;">✕</a></span>`).join('')}
+    </div>
+    <div class="field-row"><div class="field"><input id="new-category" placeholder="Nama kategori baru"></div><button class="btn" style="height:42px;" onclick="App.addCategory()">Tambah</button></div>
+  </div>
+
+  <div class="section-title"><h3>Log Aktivitas</h3></div>
+  <div class="list-card">
+    ${S.activity.log.length? S.activity.log.slice(0,12).map(a=>`<div class="list-row"><div><div class="main-txt">${esc(a.actor)}</div><div class="sub-txt">${esc(a.text)}</div></div><div class="cell-soft">${new Date(a.ts).toLocaleString('id-ID')}</div></div>`).join('') : `<div class="empty-state"><p>Belum ada aktivitas tercatat.</p></div>`}
+  </div>
+  `;
+}
+
+/* ============================= APP CONTROLLER ============================= */
+const App = {
+  async init(){
+    await loadAll();
+    renderLogin();
+  },
+  async login(who){
+    currentUser = who;
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='block';
+    render();
+  },
+  logout(){
+    currentUser = null;
+    document.getElementById('app').style.display='none';
+    document.getElementById('login-screen').style.display='flex';
+    renderLogin();
+  },
+  goTo(page){ currentPage = page; App.closeAllOverlays(); render(); document.getElementById('sidebar').classList.remove('open'); window.scrollTo(0,0); },
+  reRenderPage(){ renderPage(); },
+  toggleSidebar(){ document.getElementById('sidebar').classList.toggle('open'); },
+  closeModal(){ document.getElementById('modal').classList.remove('open'); document.getElementById('backdrop').classList.remove('open'); },
+  closeAllOverlays(){ App.closeModal(); document.getElementById('sidebar').classList.remove('open'); },
+  setItemsTab(t){ activeTab.items=t; renderPage(); },
+  setHoneymoonTab(t){ activeTab.honeymoon=t; renderPage(); },
+
+  /* ---- Budget ---- */
+  newBudgetItem(){
+    openForm('Tambah Pos Anggaran', [
+      {key:'name', label:'Nama Item'},
+      {key:'category', label:'Kategori', type:'select', options:S.budget.categories.map(c=>({value:c,label:c}))},
+      {row:[{key:'estimated', label:'Estimasi (Rp)', type:'number'},{key:'actual', label:'Realisasi (Rp)', type:'number'}]},
+      {row:[{key:'paid', label:'Sudah Dibayar (Rp)', type:'number'},{key:'dueDate', label:'Tenggat', type:'date'}]},
+      {key:'vendor', label:'Vendor'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {category:S.budget.categories[0]}, (v)=>{
+      S.budget.items.push({id:uid(), ...v}); saveKey('budget'); logActivity(`menambahkan pos anggaran "${v.name}"`); renderPage();
+    });
+  },
+  editBudgetItem(id){
+    const item = S.budget.items.find(i=>i.id===id);
+    openForm('Ubah Pos Anggaran', [
+      {key:'name', label:'Nama Item'},
+      {key:'category', label:'Kategori', type:'select', options:S.budget.categories.map(c=>({value:c,label:c}))},
+      {row:[{key:'estimated', label:'Estimasi (Rp)', type:'number'},{key:'actual', label:'Realisasi (Rp)', type:'number'}]},
+      {row:[{key:'paid', label:'Sudah Dibayar (Rp)', type:'number'},{key:'dueDate', label:'Tenggat', type:'date'}]},
+      {key:'vendor', label:'Vendor'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], item, (v)=>{ Object.assign(item, v); saveKey('budget'); logActivity(`memperbarui pos anggaran "${v.name}"`); renderPage(); });
+  },
+  deleteBudgetItem(id){ openConfirm('Hapus pos anggaran ini?', ()=>{ S.budget.items = S.budget.items.filter(i=>i.id!==id); saveKey('budget'); logActivity('menghapus sebuah pos anggaran'); renderPage(); }); },
+  addCategory(){ const el=document.getElementById('new-category'); const v=el.value.trim(); if(v && !S.budget.categories.includes(v)){ S.budget.categories.push(v); saveKey('budget'); renderPage(); } },
+  removeCategory(c){ S.budget.categories = S.budget.categories.filter(x=>x!==c); saveKey('budget'); renderPage(); },
+
+  /* ---- Savings ---- */
+  newSavingsTx(){
+    openForm('Tambah Setoran Tabungan', [
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'person', label:'Penyetor', type:'select', options:[{value:'Pria',label:S.settings.groomName},{value:'Wanita',label:S.settings.brideName}]}]},
+      {key:'amount', label:'Jumlah (Rp)', type:'number'},
+      {key:'note', label:'Catatan'},
+    ], {date:new Date().toISOString().slice(0,10), person:'Pria'}, (v)=>{
+      S.savings.transactions.push({id:uid(), ...v}); saveKey('savings'); logActivity(`menambahkan setoran tabungan ${fmtRupiah(v.amount)}`); renderPage();
+    });
+  },
+  editSavingsTx(id){
+    const t = S.savings.transactions.find(x=>x.id===id);
+    openForm('Ubah Setoran Tabungan', [
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'person', label:'Penyetor', type:'select', options:[{value:'Pria',label:S.settings.groomName},{value:'Wanita',label:S.settings.brideName}]}]},
+      {key:'amount', label:'Jumlah (Rp)', type:'number'},
+      {key:'note', label:'Catatan'},
+    ], t, (v)=>{ Object.assign(t, v); saveKey('savings'); logActivity('memperbarui setoran tabungan'); renderPage(); });
+  },
+  deleteSavingsTx(id){ openConfirm('Apakah Anda yakin ingin menghapus transaksi tabungan ini?', ()=>{ S.savings.transactions = S.savings.transactions.filter(x=>x.id!==id); saveKey('savings'); logActivity('menghapus setoran tabungan'); renderPage(); }); },
+
+  /* ---- Checklist ---- */
+  toggleChecklist(id){ const i=S.checklist.items.find(x=>x.id===id); i.status = i.status==='COMPLETED'?'TODO':'COMPLETED'; saveKey('checklist'); logActivity(`menandai "${i.task}" sebagai ${i.status==='COMPLETED'?'selesai':'belum selesai'}`); renderPage(); },
+  newChecklistItem(){
+    openForm('Tambah Tugas Checklist', [
+      {key:'task', label:'Nama Tugas'},
+      {key:'milestone', label:'Fase', type:'select', options:MILESTONES.map(m=>({value:m.id,label:m.label}))},
+      {row:[{key:'dueDate', label:'Tenggat (opsional)', type:'date'},{key:'priority', label:'Prioritas', type:'select', options:[{value:'LOW',label:'Rendah'},{value:'MEDIUM',label:'Sedang'},{value:'HIGH',label:'Tinggi'}]}]},
+      {key:'status', label:'Status', type:'select', options:[{value:'TODO',label:'Belum Mulai'},{value:'IN_PROGRESS',label:'Berjalan'},{value:'COMPLETED',label:'Selesai'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {milestone:MILESTONES[0].id, priority:'MEDIUM', status:'TODO'}, (v)=>{
+      S.checklist.items.push({id:uid(), ...v}); saveKey('checklist'); logActivity(`menambahkan tugas "${v.task}"`); renderPage();
+    });
+  },
+  editChecklistItem(id){
+    const item = S.checklist.items.find(i=>i.id===id);
+    openForm('Ubah Tugas Checklist', [
+      {key:'task', label:'Nama Tugas'},
+      {key:'milestone', label:'Fase', type:'select', options:MILESTONES.map(m=>({value:m.id,label:m.label}))},
+      {row:[{key:'dueDate', label:'Tenggat (opsional)', type:'date'},{key:'priority', label:'Prioritas', type:'select', options:[{value:'LOW',label:'Rendah'},{value:'MEDIUM',label:'Sedang'},{value:'HIGH',label:'Tinggi'}]}]},
+      {key:'status', label:'Status', type:'select', options:[{value:'TODO',label:'Belum Mulai'},{value:'IN_PROGRESS',label:'Berjalan'},{value:'COMPLETED',label:'Selesai'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], item, (v)=>{ Object.assign(item, v); saveKey('checklist'); logActivity(`memperbarui tugas "${v.task}"`); renderPage(); });
+  },
+  deleteChecklistItem(id){ openConfirm('Hapus tugas checklist ini?', ()=>{ S.checklist.items = S.checklist.items.filter(i=>i.id!==id); saveKey('checklist'); logActivity('menghapus sebuah tugas checklist'); renderPage(); }); },
+
+  /* ---- Guests ---- */
+  newGuest(){
+    openForm('Tambah Tamu', [
+      {key:'name', label:'Nama Tamu'},
+      {row:[{key:'category', label:'Kategori', type:'select', options:['Keluarga','Teman','Rekan Kerja','Komunitas','Tetangga','Lainnya'].map(c=>({value:c,label:c}))},{key:'side', label:'Pihak', type:'select', options:[{value:'Pria',label:'Pria'},{value:'Wanita',label:'Wanita'},{value:'Bersama',label:'Bersama'}]}]},
+      {row:[{key:'phone', label:'Telepon'},{key:'invited', label:'Jumlah Diundang', type:'number'}]},
+      {row:[{key:'rsvp', label:'Status RSVP', type:'select', options:[{value:'PENDING',label:'Menunggu'},{value:'HADIR',label:'Hadir'},{value:'TIDAK_HADIR',label:'Tidak Hadir'}]},{key:'attending', label:'Jumlah Hadir', type:'number'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {category:'Keluarga', side:'Bersama', invited:1, rsvp:'PENDING'}, (v)=>{
+      S.guests.list.push({id:uid(), ...v}); saveKey('guests'); logActivity(`menambahkan tamu "${v.name}"`); renderPage();
+    });
+  },
+  editGuest(id){
+    const g = S.guests.list.find(x=>x.id===id);
+    openForm('Ubah Data Tamu', [
+      {key:'name', label:'Nama Tamu'},
+      {row:[{key:'category', label:'Kategori', type:'select', options:['Keluarga','Teman','Rekan Kerja','Komunitas','Tetangga','Lainnya'].map(c=>({value:c,label:c}))},{key:'side', label:'Pihak', type:'select', options:[{value:'Pria',label:'Pria'},{value:'Wanita',label:'Wanita'},{value:'Bersama',label:'Bersama'}]}]},
+      {row:[{key:'phone', label:'Telepon'},{key:'invited', label:'Jumlah Diundang', type:'number'}]},
+      {row:[{key:'rsvp', label:'Status RSVP', type:'select', options:[{value:'PENDING',label:'Menunggu'},{value:'HADIR',label:'Hadir'},{value:'TIDAK_HADIR',label:'Tidak Hadir'}]},{key:'attending', label:'Jumlah Hadir', type:'number'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], g, (v)=>{ Object.assign(g, v); saveKey('guests'); logActivity(`memperbarui data tamu "${v.name}"`); renderPage(); });
+  },
+  deleteGuest(id){ openConfirm('Hapus tamu ini dari daftar?', ()=>{ S.guests.list = S.guests.list.filter(x=>x.id!==id); saveKey('guests'); logActivity('menghapus seorang tamu'); renderPage(); }); },
+
+  /* ---- Vendors ---- */
+  newVendor(){
+    const statusOpts = [{value:'BELUM_HUBUNGI',label:'Belum Dihubungi'},{value:'DIHUBUNGI',label:'Dihubungi'},{value:'NEGOSIASI',label:'Negosiasi'},{value:'DIPILIH',label:'Dipilih'},{value:'KONTRAK',label:'Kontrak Ditandatangani'},{value:'BATAL',label:'Dibatalkan'}];
+    openForm('Tambah Vendor', [
+      {key:'name', label:'Nama Vendor'},
+      {row:[{key:'category', label:'Kategori', type:'select', options:['Venue','Katering','Dekorasi','Dokumentasi','MUA','Busana','Undangan','Souvenir','Wedding Organizer','MC','Hiburan','Transportasi','Lainnya'].map(c=>({value:c,label:c}))},{key:'status', label:'Status Kontrak', type:'select', options:statusOpts}]},
+      {row:[{key:'contact', label:'Kontak Person'},{key:'phone', label:'Telepon/WA'}]},
+      {row:[{key:'estimated', label:'Estimasi (Rp)', type:'number'},{key:'agreed', label:'Disepakati (Rp)', type:'number'}]},
+      {row:[{key:'paid', label:'Sudah Dibayar (Rp)', type:'number'},{key:'dueDate', label:'Tenggat Pembayaran', type:'date'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {category:'Venue', status:'BELUM_HUBUNGI'}, (v)=>{ S.vendors.list.push({id:uid(), ...v}); saveKey('vendors'); logActivity(`menambahkan vendor "${v.name}"`); renderPage(); });
+  },
+  editVendor(id){
+    const statusOpts = [{value:'BELUM_HUBUNGI',label:'Belum Dihubungi'},{value:'DIHUBUNGI',label:'Dihubungi'},{value:'NEGOSIASI',label:'Negosiasi'},{value:'DIPILIH',label:'Dipilih'},{value:'KONTRAK',label:'Kontrak Ditandatangani'},{value:'BATAL',label:'Dibatalkan'}];
+    const v0 = S.vendors.list.find(x=>x.id===id);
+    openForm('Ubah Vendor', [
+      {key:'name', label:'Nama Vendor'},
+      {row:[{key:'category', label:'Kategori', type:'select', options:['Venue','Katering','Dekorasi','Dokumentasi','MUA','Busana','Undangan','Souvenir','Wedding Organizer','MC','Hiburan','Transportasi','Lainnya'].map(c=>({value:c,label:c}))},{key:'status', label:'Status Kontrak', type:'select', options:statusOpts}]},
+      {row:[{key:'contact', label:'Kontak Person'},{key:'phone', label:'Telepon/WA'}]},
+      {row:[{key:'estimated', label:'Estimasi (Rp)', type:'number'},{key:'agreed', label:'Disepakati (Rp)', type:'number'}]},
+      {row:[{key:'paid', label:'Sudah Dibayar (Rp)', type:'number'},{key:'dueDate', label:'Tenggat Pembayaran', type:'date'}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], v0, (v)=>{ Object.assign(v0, v); saveKey('vendors'); logActivity(`memperbarui vendor "${v.name}"`); renderPage(); });
+  },
+  deleteVendor(id){ openConfirm('Hapus vendor ini?', ()=>{ S.vendors.list = S.vendors.list.filter(x=>x.id!==id); saveKey('vendors'); logActivity('menghapus sebuah vendor'); renderPage(); }); },
+
+  /* ---- Documents ---- */
+  newDocument(){
+    openForm('Tambah Dokumen', [
+      {key:'name', label:'Nama Dokumen'},
+      {row:[{key:'person', label:'Pihak', type:'select', options:['Pria','Wanita','Keluarga','Administrasi'].map(c=>({value:c,label:c}))},{key:'status', label:'Status', type:'select', options:[{value:'BELUM',label:'Belum Mulai'},{value:'PROSES',label:'Diproses'},{value:'SIAP',label:'Siap'},{value:'DIAJUKAN',label:'Diajukan'},{value:'SELESAI',label:'Selesai'}]}]},
+      {key:'deadline', label:'Tenggat', type:'date'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {person:'Administrasi', status:'BELUM'}, (v)=>{ S.documents.list.push({id:uid(), ...v}); saveKey('documents'); logActivity(`menambahkan dokumen "${v.name}"`); renderPage(); });
+  },
+  editDocument(id){
+    const d = S.documents.list.find(x=>x.id===id);
+    openForm('Ubah Dokumen', [
+      {key:'name', label:'Nama Dokumen'},
+      {row:[{key:'person', label:'Pihak', type:'select', options:['Pria','Wanita','Keluarga','Administrasi'].map(c=>({value:c,label:c}))},{key:'status', label:'Status', type:'select', options:[{value:'BELUM',label:'Belum Mulai'},{value:'PROSES',label:'Diproses'},{value:'SIAP',label:'Siap'},{value:'DIAJUKAN',label:'Diajukan'},{value:'SELESAI',label:'Selesai'}]}]},
+      {key:'deadline', label:'Tenggat', type:'date'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], d, (v)=>{ Object.assign(d, v); saveKey('documents'); logActivity(`memperbarui dokumen "${v.name}"`); renderPage(); });
+  },
+  deleteDocument(id){ openConfirm('Hapus dokumen ini dari daftar?', ()=>{ S.documents.list = S.documents.list.filter(x=>x.id!==id); saveKey('documents'); logActivity('menghapus sebuah dokumen'); renderPage(); }); },
+
+  /* ---- Mahar/Seserahan/Souvenir ---- */
+  newItem(kind){
+    openForm(kind==='mahar'?'Tambah Item Mahar':'Tambah Item Seserahan', [
+      {key:'name', label:'Nama Barang'},
+      {row:[{key:'qty', label:'Jumlah', type:'number'},{key:'estimated', label:'Estimasi (Rp)', type:'number'}]},
+      {row:[{key:'actual', label:'Realisasi (Rp)', type:'number'},{key:'status', label:'Status', type:'select', options:[{value:'PLANNED',label:'Direncanakan'},{value:'PURCHASED',label:'Dibeli'},{value:'PREPARED',label:'Disiapkan'},{value:'COMPLETED',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {qty:1, status:'PLANNED'}, (v)=>{ S.items[kind].push({id:uid(), ...v}); saveKey('items'); logActivity(`menambahkan item ${kind} "${v.name}"`); renderPage(); });
+  },
+  editItem(id){
+    const kind = activeTab.items;
+    const item = S.items[kind].find(x=>x.id===id);
+    openForm('Ubah Item', [
+      {key:'name', label:'Nama Barang'},
+      {row:[{key:'qty', label:'Jumlah', type:'number'},{key:'estimated', label:'Estimasi (Rp)', type:'number'}]},
+      {row:[{key:'actual', label:'Realisasi (Rp)', type:'number'},{key:'status', label:'Status', type:'select', options:[{value:'PLANNED',label:'Direncanakan'},{value:'PURCHASED',label:'Dibeli'},{value:'PREPARED',label:'Disiapkan'},{value:'COMPLETED',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], item, (v)=>{ Object.assign(item, v); saveKey('items'); logActivity(`memperbarui item "${v.name}"`); renderPage(); });
+  },
+  deleteItem(kindOrId, maybeId){
+    const kind = maybeId? kindOrId : activeTab.items;
+    const id = maybeId || kindOrId;
+    openConfirm('Hapus item ini?', ()=>{ S.items[kind] = S.items[kind].filter(x=>x.id!==id); saveKey('items'); logActivity('menghapus sebuah item'); renderPage(); });
+  },
+  newSouvenir(){
+    openForm('Tambah Souvenir', [
+      {key:'name', label:'Nama Souvenir'},
+      {row:[{key:'qty', label:'Jumlah', type:'number'},{key:'unitPrice', label:'Harga Satuan (Rp)', type:'number'}]},
+      {row:[{key:'vendor', label:'Vendor'},{key:'status', label:'Status', type:'select', options:[{value:'PLANNED',label:'Direncanakan'},{value:'PURCHASED',label:'Dibeli'},{value:'PREPARED',label:'Disiapkan'},{value:'COMPLETED',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {qty:1, status:'PLANNED'}, (v)=>{ S.items.souvenir.push({id:uid(), ...v}); saveKey('items'); logActivity(`menambahkan souvenir "${v.name}"`); renderPage(); });
+  },
+  editSouvenir(id){
+    const item = S.items.souvenir.find(x=>x.id===id);
+    openForm('Ubah Souvenir', [
+      {key:'name', label:'Nama Souvenir'},
+      {row:[{key:'qty', label:'Jumlah', type:'number'},{key:'unitPrice', label:'Harga Satuan (Rp)', type:'number'}]},
+      {row:[{key:'vendor', label:'Vendor'},{key:'status', label:'Status', type:'select', options:[{value:'PLANNED',label:'Direncanakan'},{value:'PURCHASED',label:'Dibeli'},{value:'PREPARED',label:'Disiapkan'},{value:'COMPLETED',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], item, (v)=>{ Object.assign(item, v); saveKey('items'); logActivity(`memperbarui souvenir "${v.name}"`); renderPage(); });
+  },
+
+  /* ---- Honeymoon ---- */
+  editHoneymoonBudget(){
+    openForm('Ubah Anggaran Bulan Madu', [
+      {row:[{key:'estimated', label:'Estimasi (Rp)', type:'number'},{key:'actual', label:'Realisasi (Rp)', type:'number'}]},
+      {key:'paid', label:'Sudah Dibayar (Rp)', type:'number'},
+    ], S.honeymoon.budget, (v)=>{ Object.assign(S.honeymoon.budget, v); saveKey('honeymoon'); logActivity('memperbarui anggaran bulan madu'); renderPage(); });
+  },
+  newFlight(){
+    openForm('Tambah Penerbangan', [
+      {key:'airline', label:'Maskapai'}, {key:'route', label:'Rute (mis. CGK - DPS)'},
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'time', label:'Jam', type:'time'}]},
+      {row:[{key:'bookingCode', label:'Kode Booking'},{key:'price', label:'Harga (Rp)', type:'number'}]},
+      {key:'status', label:'Status Pembayaran', type:'select', options:[{value:'UNPAID',label:'Belum Bayar'},{value:'PARTIAL',label:'Sebagian'},{value:'PAID',label:'Lunas'}]},
+    ], {status:'UNPAID'}, (v)=>{ S.honeymoon.flights.push({id:uid(), ...v}); saveKey('honeymoon'); logActivity('menambahkan data penerbangan'); renderPage(); });
+  },
+  editFlight(id){
+    const f = S.honeymoon.flights.find(x=>x.id===id);
+    openForm('Ubah Penerbangan', [
+      {key:'airline', label:'Maskapai'}, {key:'route', label:'Rute'},
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'time', label:'Jam', type:'time'}]},
+      {row:[{key:'bookingCode', label:'Kode Booking'},{key:'price', label:'Harga (Rp)', type:'number'}]},
+      {key:'status', label:'Status Pembayaran', type:'select', options:[{value:'UNPAID',label:'Belum Bayar'},{value:'PARTIAL',label:'Sebagian'},{value:'PAID',label:'Lunas'}]},
+    ], f, (v)=>{ Object.assign(f, v); saveKey('honeymoon'); logActivity('memperbarui data penerbangan'); renderPage(); });
+  },
+  newHotel(){
+    openForm('Tambah Penginapan', [
+      {key:'name', label:'Nama Hotel'}, {key:'location', label:'Lokasi'},
+      {row:[{key:'checkin', label:'Check-in', type:'date'},{key:'checkout', label:'Check-out', type:'date'}]},
+      {row:[{key:'price', label:'Harga (Rp)', type:'number'},{key:'status', label:'Status Pembayaran', type:'select', options:[{value:'UNPAID',label:'Belum Bayar'},{value:'PARTIAL',label:'Sebagian'},{value:'PAID',label:'Lunas'}]}]},
+      {key:'contact', label:'Kontak'},
+    ], {status:'UNPAID'}, (v)=>{ S.honeymoon.hotels.push({id:uid(), ...v}); saveKey('honeymoon'); logActivity('menambahkan data penginapan'); renderPage(); });
+  },
+  editHotel(id){
+    const h = S.honeymoon.hotels.find(x=>x.id===id);
+    openForm('Ubah Penginapan', [
+      {key:'name', label:'Nama Hotel'}, {key:'location', label:'Lokasi'},
+      {row:[{key:'checkin', label:'Check-in', type:'date'},{key:'checkout', label:'Check-out', type:'date'}]},
+      {row:[{key:'price', label:'Harga (Rp)', type:'number'},{key:'status', label:'Status Pembayaran', type:'select', options:[{value:'UNPAID',label:'Belum Bayar'},{value:'PARTIAL',label:'Sebagian'},{value:'PAID',label:'Lunas'}]}]},
+      {key:'contact', label:'Kontak'},
+    ], h, (v)=>{ Object.assign(h, v); saveKey('honeymoon'); logActivity('memperbarui data penginapan'); renderPage(); });
+  },
+  newTravelDoc(){
+    openForm('Tambah Dokumen Perjalanan', [
+      {key:'name', label:'Nama Dokumen (mis. Paspor, Visa, Asuransi)'},
+      {row:[{key:'deadline', label:'Tenggat', type:'date'},{key:'status', label:'Status', type:'select', options:[{value:'BELUM',label:'Belum Mulai'},{value:'PROSES',label:'Diproses'},{value:'SIAP',label:'Siap'},{value:'SELESAI',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {status:'BELUM'}, (v)=>{ S.honeymoon.travelDocs.push({id:uid(), ...v}); saveKey('honeymoon'); logActivity('menambahkan dokumen perjalanan'); renderPage(); });
+  },
+  editTravelDoc(id){
+    const t = S.honeymoon.travelDocs.find(x=>x.id===id);
+    openForm('Ubah Dokumen Perjalanan', [
+      {key:'name', label:'Nama Dokumen'},
+      {row:[{key:'deadline', label:'Tenggat', type:'date'},{key:'status', label:'Status', type:'select', options:[{value:'BELUM',label:'Belum Mulai'},{value:'PROSES',label:'Diproses'},{value:'SIAP',label:'Siap'},{value:'SELESAI',label:'Selesai'}]}]},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], t, (v)=>{ Object.assign(t, v); saveKey('honeymoon'); logActivity('memperbarui dokumen perjalanan'); renderPage(); });
+  },
+  newItineraryDay(){
+    openForm('Tambah Hari Itinerary', [
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'location', label:'Lokasi'}]},
+      {key:'morning', label:'Pagi'}, {key:'afternoon', label:'Siang'}, {key:'evening', label:'Malam'},
+      {key:'budget', label:'Perkiraan Biaya (Rp)', type:'number'},
+    ], {}, (v)=>{ S.honeymoon.itinerary.push({id:uid(), ...v}); saveKey('honeymoon'); logActivity('menambahkan hari itinerary bulan madu'); renderPage(); });
+  },
+  editItineraryDay(id){
+    const d = S.honeymoon.itinerary.find(x=>x.id===id);
+    openForm('Ubah Hari Itinerary', [
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'location', label:'Lokasi'}]},
+      {key:'morning', label:'Pagi'}, {key:'afternoon', label:'Siang'}, {key:'evening', label:'Malam'},
+      {key:'budget', label:'Perkiraan Biaya (Rp)', type:'number'},
+    ], d, (v)=>{ Object.assign(d, v); saveKey('honeymoon'); logActivity('memperbarui itinerary bulan madu'); renderPage(); });
+  },
+  deleteHoneymoonSub(list, id){ openConfirm('Hapus data ini?', ()=>{ S.honeymoon[list] = S.honeymoon[list].filter(x=>x.id!==id); saveKey('honeymoon'); logActivity('menghapus data bulan madu'); renderPage(); }); },
+
+  /* ---- Gifts ---- */
+  newGift(){
+    openForm('Tambah Catatan Kado/Angpao', [
+      {key:'guest', label:'Nama Pemberi'},
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'type', label:'Jenis', type:'select', options:[{value:'TUNAI',label:'Tunai'},{value:'TRANSFER',label:'Transfer'},{value:'BARANG',label:'Barang'}]}]},
+      {key:'amount', label:'Nilai (Rp)', type:'number'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], {date:new Date().toISOString().slice(0,10), type:'TUNAI'}, (v)=>{ S.gifts.list.push({id:uid(), ...v}); saveKey('gifts'); logActivity('menambahkan catatan kado/angpao'); renderPage(); });
+  },
+  editGift(id){
+    const g = S.gifts.list.find(x=>x.id===id);
+    openForm('Ubah Catatan Kado/Angpao', [
+      {key:'guest', label:'Nama Pemberi'},
+      {row:[{key:'date', label:'Tanggal', type:'date'},{key:'type', label:'Jenis', type:'select', options:[{value:'TUNAI',label:'Tunai'},{value:'TRANSFER',label:'Transfer'},{value:'BARANG',label:'Barang'}]}]},
+      {key:'amount', label:'Nilai (Rp)', type:'number'},
+      {key:'notes', label:'Catatan', type:'textarea'},
+    ], g, (v)=>{ Object.assign(g, v); saveKey('gifts'); logActivity('memperbarui catatan kado/angpao'); renderPage(); });
+  },
+  deleteGift(id){ openConfirm('Hapus catatan ini?', ()=>{ S.gifts.list = S.gifts.list.filter(x=>x.id!==id); saveKey('gifts'); logActivity('menghapus catatan kado/angpao'); renderPage(); }); },
+
+  /* ---- Settings ---- */
+  saveSettings(){
+    S.settings.groomName = document.getElementById('set_groomName').value || 'Mempelai Pria';
+    S.settings.brideName = document.getElementById('set_brideName').value || 'Mempelai Wanita';
+    S.settings.weddingDate = document.getElementById('set_weddingDate').value;
+    S.settings.location = document.getElementById('set_location').value;
+    S.settings.engagementDate = document.getElementById('set_engagementDate').value;
+    S.settings.nikahDate = document.getElementById('set_nikahDate').value;
+    S.settings.budgetTarget = parseNum(document.getElementById('set_budgetTarget').value);
+    S.settings.savingsTarget = parseNum(document.getElementById('set_savingsTarget').value);
+    saveKey('settings'); logActivity('memperbarui pengaturan pernikahan'); render();
+  },
+};
+
+App.init();
+</script>
+</body>
+</html>
